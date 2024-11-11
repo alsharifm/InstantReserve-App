@@ -12,10 +12,8 @@ class User(Base):
     email = Column(String, unique=True, nullable=False)
     password = Column(String, nullable=False)
     created_at = Column(DateTime, default=datetime.utcnow)
-
+    ##Will code work to show multiple reservations under the same user?
     reservations = relationship("Reservation", back_populates="user")
-
-#testing editing 
 
 
 class Reservation(Base):
@@ -29,3 +27,17 @@ class Reservation(Base):
     status = Column(String, nullable=False, default="pending")
 
     user = relationship("User", back_populates="reservations")
+    business = relationship("Business", back_populates="reservations")
+
+##Will code work to show multiple reservations under the same business?
+class Business(Base):
+    __tablename__ = 'businesses'
+    
+    id = Column(Integer, primary_key=True, index=True)
+    business_name = Column(Integer, ForeignKey('users.id'))
+    location = Column(String, nullable=False)
+    business_email = Column(DateTime, nullable=False)
+    business_phone = Column(Integer, nullable=False)
+    category = Column(String, nullable=False, default="pending")
+
+    reservations = relationship("Reservation", back_populates="business")
