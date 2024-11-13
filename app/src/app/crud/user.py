@@ -11,7 +11,6 @@ from src.app.schemas.user import UserCreate, UserUpdate
 from sqlalchemy.orm import Session
 from src.app.models.reservation import Reservation
 from src.app.models.business import Business
-from passlib.context import CryptContext
 from sqlalchemy.exc import IntegrityError
 from fastapi import HTTPException, status
 from sqlalchemy.exc import SQLAlchemyError
