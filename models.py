@@ -8,10 +8,12 @@ class User(Base):
     __tablename__ = 'users'
     
     id = Column(Integer, primary_key=True, index=True)
-    name = Column(String, nullable=False)
+    username = Column(String, unique=True, nullable=False)
     email = Column(String, unique=True, nullable=False)
     password = Column(String, nullable=False)
-    created_at = Column(DateTime, default=datetime.utcnow)
+    created_date = Column(DateTime, default=datetime.utcnow)
+    phone = Column(Integer, unique=True, nullable=False)
+    fullname = Column(String, nullable=False)
     ##Will code work to show multiple reservations under the same user?
     reservations = relationship("Reservation", back_populates="user")
 
@@ -21,13 +23,10 @@ class Reservation(Base):
     
     id = Column(Integer, primary_key=True, index=True)
     user_id = Column(Integer, ForeignKey('users.id'))
-    location = Column(String, nullable=False)
-    time = Column(DateTime, nullable=False)
-    party_size = Column(Integer, nullable=False)
-    status = Column(String, nullable=False, default="pending")
-
-    user = relationship("User", back_populates="reservations")
-    business = relationship("Business", back_populates="reservations")
+    time = Column(Integer, nullable=False)
+    date = Column(Integer, nullable=False)
+    
+    business_id = relationship("Business", back_populates="reservations")
 
 ##Will code work to show multiple reservations under the same business?
 class Business(Base):
@@ -35,8 +34,9 @@ class Business(Base):
     
     id = Column(Integer, primary_key=True, index=True)
     business_name = Column(Integer, ForeignKey('users.id'))
-    location = Column(String, nullable=False)
-    business_email = Column(DateTime, nullable=False)
+    address = Column(String, nullable=False)
+    business_email = Column(String, nullable=False)
+    businessOpen = Column(Integer, nullable=False)
     business_phone = Column(Integer, nullable=False)
     category = Column(String, nullable=False, default="pending")
 
