@@ -13,4 +13,4 @@ class User(Base):
     phone = Column(Integer, unique=True, nullable=False)
     fullname = Column(String, nullable=False)
 
-    reservations = relationship("Reservation", back_populates="user")
+    #reservations = relationship("Reservation", back_populates="user")

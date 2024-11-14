@@ -7,8 +7,9 @@ class Reservation(Base):
     
     id = Column(Integer, primary_key=True, index=True)
     user_id = Column(Integer, ForeignKey('users.id'))
+    business_id = Column(Integer, ForeignKey('business.id'))
     time = Column(Integer, nullable=False)
     date = Column(Integer, nullable=False)
     
-    business_id = relationship("Business", back_populates="reservations")
-    reservations = relationship("Reservation", back_populates="user")
+    #business_id = relationship("Business", back_populates="reservations")
+    #reservations = relationship("Reservation", back_populates="user")
