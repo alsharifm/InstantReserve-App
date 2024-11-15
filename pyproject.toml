@@ -35,9 +35,9 @@ dependencies = [
 ]
 
 [project.urls]
-Documentation = "https://github.com/Ugur Emre Dogan/app#readme"
-Issues = "https://github.com/Ugur Emre Dogan/app/issues"
-Source = "https://github.com/Ugur Emre Dogan/app"
+Documentation = "https://github.com/ASM701 Abdulmohsen Almunayes/app#readme"
+Issues = "https://github.com/ASM701 Abdulmohsen Almunayes/app/issues"
+Source = "https://github.com/ASM701 Abdulmohsen Almunayes/app"
 
 [tool.hatch.version]
 path = "src/app/__about__.py"
@@ -48,7 +48,7 @@ installer = "uv"
 path = ".venv"
 
 [tool.hatch.envs.default.scripts]
-dev = "PYTHONPATH=src uvicorn app.main:app --reload"
+dev = "PYTHONPATH=src uvicorn app.main:app --reload --reload-exclude '.venv'"
 
 [tool.hatch.envs.default.env-vars]
 PYTHONASYNCIODEBUG = "1"
