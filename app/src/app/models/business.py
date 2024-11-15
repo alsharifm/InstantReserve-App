@@ -1,11 +1,11 @@
+import enum
 from datetime import UTC, datetime
 from sqlalchemy import Boolean, Column, DateTime, Integer, String
 from app.core.database import Base
 from sqlmodel import Field, Relationship, Session, SQLModel, create_engine
+from sqlalchemy.orm import relationship
 
-class BusinessReservationLink(SQLModel, table=True):
-    reservation_id: int | None = Field(default=None, foreign_key="reservation.id", primary_key=True)
-    business_id: int | None = Field(default=None, foreign_key="business.id", primary_key=True)
+from app.core.database import Base
 
 class Business(Base):
     __tablename__ = 'businesses'
@@ -18,5 +18,6 @@ class Business(Base):
     business_phone = Column(Integer, nullable=False)
     category = Column(String, nullable=False, default="pending")
 
-    #reservations = relationship(back_populates="business", link_model = BusinessReservationLink)
+
+    reservations = relationship("Reservation", back_populates="business")
 

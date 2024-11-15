@@ -12,11 +12,12 @@ class UserCreate(UserBase):
     password: str
 
 
+
 class User(UserBase):
     id: int
     is_active: bool
     is_verified: bool
-    created_at: datetime
+    created_date: datetime
 
     class Config:
         from_attributes = True
@@ -27,6 +28,14 @@ class UserResponse(BaseModel):
     username: str
     email: EmailStr
     created_at: datetime
+
+    class Config:
+        from_attributes = True
+
+class UserUpdate(BaseModel):
+    username: str
+    email: str
+    phone: str
 
     class Config:
         from_attributes = True

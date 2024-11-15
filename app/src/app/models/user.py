@@ -1,6 +1,10 @@
 from datetime import UTC, datetime
+
 from sqlalchemy import Boolean, Column, DateTime, Integer, String
-from app.core.database import Base
+from sqlalchemy.orm import relationship
+
+from src.app.core.database import Base
+
 
 class User(Base):
     __tablename__ = 'users'
@@ -10,7 +14,7 @@ class User(Base):
     email = Column(String, unique=True, nullable=False)
     password = Column(String, nullable=False)
     created_date = Column(DateTime, default=datetime.utcnow)
-    phone = Column(Integer, unique=True, nullable=False)
+    phone = Column(String, unique=True, nullable=False)
     fullname = Column(String, nullable=False)
-
-    #reservations = relationship("Reservation", back_populates="user")
+    
+    reservations = relationship("Reservation", back_populates="user")

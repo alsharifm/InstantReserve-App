@@ -1,13 +1,18 @@
 from pydantic import BaseModel
 from datetime import datetime
+from enum import Enum
 
 class BusinessBase(BaseModel):
-    name: str
-    email: str
-    location: str
+    business_name: str
+    address: str
+    business_email: str
+    business_open: datetime
+    business_phone: str
+    category: str = "pending"
 
-class Business(UserBase):
+class Business(BusinessBase):
     id: int
 
     class Config:
         orm_mode = True
+

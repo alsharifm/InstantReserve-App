@@ -4,18 +4,36 @@ from fastapi import HTTPException
 from passlib.hash import bcrypt
 from sqlalchemy.orm import Session
 
-from app.core.config import get_settings
-from app.core.security import verify_password
-from app.models.user import User
-from app.schemas.user import UserCreate
+from src.app.core.config import get_settings
+from src.app.core.security import verify_password
+from src.app.models.user import User 
+from src.app.schemas.user import UserCreate, UserUpdate
+from sqlalchemy.orm import Session
+from src.app.models.reservation import Reservation
+from src.app.models.business import Business
+from passlib.context import CryptContext
+from sqlalchemy.exc import IntegrityError
+from fastapi import HTTPException, status
+from sqlalchemy.exc import SQLAlchemyError
+
+
 
 settings = get_settings()
 
 
 # User CRUD operations
 def get_user(db: Session, user_id: int):
-    return db.query(User).filter(User.id == user_id).first()
-
+    db_user = db.query(User).filter(User.id == user_id).first()
+    if db_user:
+        return {"success": True, "data": db_user, "error": None}
+    return {
+        "success": False,
+        "data": None,
+        "error": {
+            "code": status.HTTP_404_NOT_FOUND,
+            "message": "User not found"
+        }
+    }
 
 def get_user_by_username(db: Session, username: str):
     return db.query(User).filter(User.username == username).first()
@@ -64,3 +82,44 @@ def authenticate_user(db: Session, username: str, password: str):
 def verify_email(verification_code: str, db: Session):
     # TODO: Implement email verification
     pass
+
+
+
+def delete_user(db: Session, user_id: int):
+    try:
+        db_user = db.query(User).filter(User.id == user_id).first()
+        if db_user is None:
+            return {"success": False, "error": {"code": 400, "message": "User not found"}}
+        
+        db.delete(db_user)
+        db.commit()
+        return {"success": True, "error": None}
+    except SQLAlchemyError:
+        db.rollback()
+        return {"success": False, "error": {"code": 500, "message": "An unexpected error occurred."}}
+    
+
+def update_user(db: Session, user_id: int, user_data: UserUpdate):
+    try:
+        db_user = db.query(User).filter(User.id == user_id).first()
+        if db_user is None:
+            return {"success": False, "error": {"code": 400, "message": "User not found"}}
+        
+        for key, value in user_data.dict(exclude_unset=True).items():
+            setattr(db_user, key, value)
+        
+        db.commit()
+        db.refresh(db_user)
+        return {
+            "success": True,
+            "user": {
+                "id": db_user.id,
+                "name": db_user.name,
+                "email": db_user.email,
+                "phone": db_user.phone
+            },
+            "error": None
+        }
+    except SQLAlchemyError:
+        db.rollback()
+        return {"success": False, "error": {"code": 500, "message": "An unexpected error occurred."}}
