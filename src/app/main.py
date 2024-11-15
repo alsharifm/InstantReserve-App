@@ -14,14 +14,14 @@ app.include_router(reservations.router, prefix="/reservations", tags=["Reservati
 app.include_router(business.router, prefix="/business", tags=["Business"])
 
 # Optional: Add CORS or other middleware if needed
-# from fastapi.middleware.cors import CORSMiddleware
-# app.add_middleware(
-#     CORSMiddleware,
-#     allow_origins=["*"],
-#     allow_credentials=True,
-#     allow_methods=["*"],
-#     allow_headers=["*"],
-# )
+from fastapi.middleware.cors import CORSMiddleware
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+    )
 
 @app.get("/")
 def read_root():
