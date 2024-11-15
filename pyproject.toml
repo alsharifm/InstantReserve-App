@@ -3,15 +3,15 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "app"
+name = "Instant Reserve"
 dynamic = ["version"]
-description = 'A budget tracker application api'
+description = 'A website that consolidates different business reservations into one place'
 readme = "README.md"
 requires-python = ">=3.12"
 license = "MIT"
 keywords = []
 authors = [
-  { name = "Ugur Emre Dogan", email = "ue.dogan@gmail.com" },
+  { name = "Abdulmohsen Almunayes", email = "mo7sen701@hotmail.com" },
 ]
 classifiers = [
   "Development Status :: 4 - Beta",
