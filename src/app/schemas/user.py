@@ -32,3 +32,12 @@ class UserUpdate(BaseModel):
     username: str
     email: str
     phone: str
+
+class UserSchema(BaseModel):
+    id: int
+    name: str
+    email: EmailStr
+    phone: str
+
+    class Config:
+        from_attributes = True

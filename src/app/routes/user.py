@@ -12,8 +12,9 @@ from src.app.core.auth import (
 )
 from app.dependencies import get_db
 from app.schemas.token import Token
-from app.schemas.user import UserCreate, UserResponse, UserUpdate, User
+from app.schemas.user import UserCreate, UserResponse, UserUpdate, User, UserSchema
 from src.app.crud.user import delete_user, update_user, get_user, create_user
+from typing import List
 
 router = APIRouter()
 
@@ -23,6 +24,7 @@ def register_user(user: UserCreate, db: Session = Depends(get_db)):
     if db_user:
         raise HTTPException(status_code=400, detail="Email already registered")
     return create_user(db=db, user=user)
+
 
 @router.get("/users/{user_id}", response_model=User)
 def read_user(user_id: int, db: Session = Depends(get_db)):
@@ -39,9 +41,18 @@ def delete_user_endpoint(id: int, db: Session = Depends(get_db)):
         raise HTTPException(status_code=result["error"]["code"], detail=result["error"]["message"])
     return {"success": True}
 
+
 @router.put("/api/users/{id}", response_model=UserResponse)
 def update_user_endpoint(id: int, user_data: UserUpdate, db: Session = Depends(get_db)):
     result = update_user(db, id, user_data)
     if not result["success"]:
         raise HTTPException(status_code=result["error"]["code"], detail=result["error"]["message"])
     return result
+
+
+@router.get("/api/users", response_model=List[UserSchema])
+def get_users(db: Session = Depends(get_db)):
+    users = db.query(User).all()
+    if not users:
+        raise HTTPException(status_code=404, detail="No users found")
+    return users

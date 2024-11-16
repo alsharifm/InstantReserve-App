@@ -20,3 +20,12 @@ class ReservationUpdate(BaseModel):
     date_time: datetime = None
     user_id: int = None
     business_id: int = None
+
+class ReservationSchema(BaseModel):
+    id: int
+    user_id: int
+    business_id: int
+    date_time: datetime
+
+    class Config:
+        from_attributes = True
