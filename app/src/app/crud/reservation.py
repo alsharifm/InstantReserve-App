@@ -3,7 +3,7 @@ from sqlalchemy.orm import Session
 
 from src.app.core.auth import decode_access_token, oauth2_scheme
 from src.app.dependencies import get_db
-from src.app.services.user import get_user_by_username
+from src.app.crud.user import get_user_by_username
 from sqlalchemy.exc import SQLAlchemyError
 from src.app.schemas.reservation import ReservationCreate, Reservation, ReservationUpdate
 from src.app.schemas.user import UserUpdate

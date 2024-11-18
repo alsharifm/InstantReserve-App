@@ -6,7 +6,7 @@ from sqlalchemy.orm import Session
 
 from src.app.core.config import get_settings
 from src.app.core.security import verify_password
-from src.app.models.user import User 
+from src.app.models.user import User
 from src.app.schemas.user import UserCreate, UserUpdate
 from sqlalchemy.orm import Session
 from src.app.models.reservation import Reservation
@@ -58,6 +58,8 @@ def create_user(db: Session, user: UserCreate):
         email=user.email,
         password_hash=password_hash,
         verification_code=verification_code,
+        phone = user.phone,
+        fullname = user.fullname,
     )
 
     db.add(db_user)

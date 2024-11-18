@@ -12,9 +12,9 @@ class User(Base):
     id = Column(Integer, primary_key=True, index=True)
     username = Column(String, unique=True, nullable=False)
     email = Column(String, unique=True, nullable=False)
-    password = Column(String, nullable=False)
-    created_date = Column(DateTime, default=datetime.utcnow)
+    password_hash = Column(String, nullable=False)
     phone = Column(String, unique=True, nullable=False)
     fullname = Column(String, nullable=False)
+    verification_code = Column(String, nullable=True)
     
-    reservations = relationship("Reservation", back_populates="user")
+    #reservations = relationship("Reservation", back_populates="user")

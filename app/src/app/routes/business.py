@@ -1,13 +1,13 @@
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 
-import src.app.services.user as user_service
+import src.app.crud.user as user_service
 from src.app.core.auth import decode_access_token, oauth2_scheme
 from src.app.dependencies import get_db
 
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
-from src.app.services.business import get_business
+from src.app.crud.business import get_business
 from src.app.schemas.business import Business
 
 router = APIRouter()
