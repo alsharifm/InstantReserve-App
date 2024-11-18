@@ -1,8 +1,6 @@
+from pydantic import BaseModel
 from datetime import datetime
 from enum import Enum
-
-from pydantic import BaseModel
-
 
 class BusinessBase(BaseModel):
     business_name: str
@@ -12,11 +10,8 @@ class BusinessBase(BaseModel):
     business_phone: str
     category: str = "pending"
 
-class BusinessCreate(BusinessBase):
-    pass
-
 class Business(BusinessBase):
     id: int
 
     class Config:
-       from_attributes = True
+        orm_mode = True

@@ -1,7 +1,6 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 
-import app.crud.reservations as category_service
 from src.app.core.auth import decode_access_token, oauth2_scheme
 from src.app.dependencies import get_db
 from src.app.crud.user import get_user_by_username

@@ -6,8 +6,8 @@ from fastapi.security import OAuth2PasswordBearer
 from jwt.exceptions import InvalidTokenError
 from passlib.context import CryptContext
 
-from app.core.config import get_settings
-from app.schemas.token import TokenData
+from src.app.core.config import get_settings
+from src.app.schemas.token import TokenData
 
 settings = get_settings()
 

@@ -1,10 +1,12 @@
+from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
-from src.app.models.reservations import Reservation
-from src.app.schemas.reservations import ReservationCreate, ReservationUpdate
-from passlib.context import CryptContext
-from sqlalchemy.exc import IntegrityError
-from fastapi import HTTPException, status
+
+from src.app.core.auth import decode_access_token, oauth2_scheme
+from src.app.dependencies import get_db
+from src.app.crud.user import get_user_by_username
 from sqlalchemy.exc import SQLAlchemyError
+from src.app.schemas.reservations import ReservationCreate, Reservation, ReservationUpdate
+from src.app.schemas.user import UserUpdate
 
 
 # Reservation CRUD Operations with enhanced error handling

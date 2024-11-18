@@ -23,10 +23,11 @@ settings = get_settings()
 
 # User CRUD operations
 def get_user(db: Session, user_id: int):
-    db_user = db.query(User).filter(User.id == user_id).first()
-    if db_user:
-        return {"success": True, "data": db_user, "error": None}
-    return {
+    db_user = db.query(User).filter(User.id == user_id)
+    if db_user :
+        return db.query(User).filter(User.id == user_id).first()
+    else:
+        return {
         "success": False,
         "data": None,
         "error": {
@@ -58,6 +59,8 @@ def create_user(db: Session, user: UserCreate):
         email=user.email,
         password_hash=password_hash,
         verification_code=verification_code,
+        phone = user.phone,
+        fullname = user.fullname,
     )
 
     db.add(db_user)

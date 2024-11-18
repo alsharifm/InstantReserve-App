@@ -1,11 +1,10 @@
 from fastapi import APIRouter
 
-from app.routes import business, reservations, user
+from src.app.routes import business, reservations, user
 
 api_router = APIRouter()
 
 api_router.include_router(user.router, prefix="/users", tags=["Users"])
-api_router.include_router(reservations.router, prefix="/categories", tags=["Categories"])
-api_router.include_router(
-    business.router, prefix="/transactions", tags=["Transactions"]
+api_router.include_router(reservations.router, prefix="/reservations", tags=["Reservations"])
+api_router.include_router(business.router, prefix="/business", tags=["Business"]
 )

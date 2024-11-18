@@ -10,17 +10,17 @@ from src.app.core.auth import (
     decode_access_token,
     oauth2_scheme,
 )
-from app.dependencies import get_db
-from app.schemas.token import Token
-from app.schemas.user import UserCreate, UserResponse, UserUpdate, User, UserSchema
-from src.app.crud.user import delete_user, update_user, get_user, create_user
+from src.app.dependencies import get_db
+from src.app.schemas.token import Token
+from src.app.schemas.user import UserCreate, UserResponse, UserUpdate, User, UserSchema
+from src.app.crud.user import delete_user, update_user, get_user, create_user, get_user_by_email
 from typing import List
 
 router = APIRouter()
 
 @router.post("/users/", response_model=User)
 def register_user(user: UserCreate, db: Session = Depends(get_db)):
-    db_user = get_user(db, user_id=user.email)  # Assuming email should be checked elsewhere
+    db_user = get_user_by_email(db, user.email)  # Assuming email should be checked elsewhere
     if db_user:
         raise HTTPException(status_code=400, detail="Email already registered")
     return create_user(db=db, user=user)
