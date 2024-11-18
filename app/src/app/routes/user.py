@@ -43,16 +43,19 @@ def delete_user_endpoint(id: int, db: Session = Depends(get_db)):
 
 
 @router.put("/api/users/{id}", response_model=UserResponse)
-def update_user_endpoint(id: int, user_data: UserUpdate, db: Session = Depends(get_db)):
-    result = update_user(db, id, user_data)
-    if not result["success"]:
-        raise HTTPException(status_code=result["error"]["code"], detail=result["error"]["message"])
-    return result
+def update_user_endpoint(id: int, user: UserUpdate, db: Session = Depends(get_db)):
+    updated_user = update_user(db, id, user)
+    if updated_user == 0:
+        raise HTTPException(status_code=404, detail="User not found")
+    return updated_user
 
-
-@router.get("/api/users", response_model=List[UserSchema])
-def get_users(db: Session = Depends(get_db)):
-    users = db.query(User).all()
-    if not users:
-        raise HTTPException(status_code=404, detail="No users found")
-    return users
+##Users may not need to access all users, will get back to it if needed
+#@router.get("/api/users")
+#def get_users(db: Session = Depends(get_db), id = 4):
+    
+   # for int in db.query(User):
+      #  print( db_user = get_user(db, int))
+ #   return db.query(User).filter(User.id == id).first()
+    #if not users:
+     #   raise HTTPException(status_code=404, detail="No users found")
+    

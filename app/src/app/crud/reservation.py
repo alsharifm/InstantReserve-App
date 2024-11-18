@@ -11,7 +11,7 @@ from src.app.schemas.user import UserUpdate
 
 # Reservation CRUD Operations with enhanced error handling
 def create_reservation(db: Session, reservation: ReservationCreate, user_id: int):
-    db_reservation = Reservation(date_time=reservation.date_time, user_id=user_id, business_id=reservation.business_id)
+    db_reservation = Reservation(date_time=reservation.date_time, user_id=user_id, business_id=3)
     db.add(db_reservation)
     db.commit()
     db.refresh(db_reservation)

@@ -102,27 +102,34 @@ def delete_user(db: Session, user_id: int):
         return {"success": False, "error": {"code": 500, "message": "An unexpected error occurred."}}
     
 
-def update_user(db: Session, user_id: int, user_data: UserUpdate):
+def update_user(db: Session, user_id: int, user: UserUpdate):
     try:
         db_user = db.query(User).filter(User.id == user_id).first()
-        if db_user is None:
-            return {"success": False, "error": {"code": 400, "message": "User not found"}}
+        if db_user:  
+            db_user.username = user.username
+            db_user.email = user.email
+            db_user.phone = user.phone
         
-        for key, value in user_data.dict(exclude_unset=True).items():
-            setattr(db_user, key, value)
-        
-        db.commit()
-        db.refresh(db_user)
-        return {
-            "success": True,
-            "user": {
-                "id": db_user.id,
-                "name": db_user.name,
-                "email": db_user.email,
-                "phone": db_user.phone
-            },
-            "error": None
-        }
+            db.commit()
+            db.refresh(db_user)
+        else:
+            db_user = 0
+        return db_user
     except SQLAlchemyError:
         db.rollback()
         return {"success": False, "error": {"code": 500, "message": "An unexpected error occurred."}}
+    
+##Users may not need to access all users, will get back to it if needed
+#def get_all_users(db: Session, user_id: int):
+#    db_user = db.query(User).filter(User.id == user_id)
+#    if db_user :
+#        return db.query(User).filter(User.id == user_id).first()
+#    else:
+#        return {
+#        "success": False,
+#        "data": None,
+#        "error": {
+#            "code": status.HTTP_404_NOT_FOUND,
+#            "message": "User not found"
+#        }
+#    }

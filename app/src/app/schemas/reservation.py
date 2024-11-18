@@ -7,7 +7,6 @@ class ReservationBase(BaseModel):
     party_size: int
 
 class ReservationCreate(ReservationBase):
-    id: int
     user_id: int
     business_id: int
     party_size: int

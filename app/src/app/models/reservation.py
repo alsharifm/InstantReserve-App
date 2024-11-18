@@ -11,7 +11,7 @@ class Reservation(Base):
     
     id = Column(Integer, primary_key=True, index=True)
     time = Column(Integer, nullable=False)
-    date = Column(Integer, nullable=False)
+    date = Column(DateTime, nullable=False)
     user_id = Column(Integer, ForeignKey("users.id"))
     business_id = Column(Integer, ForeignKey("business.id"))
     party_size = Column(Integer, nullable = False)

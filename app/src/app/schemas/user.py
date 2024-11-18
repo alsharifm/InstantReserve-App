@@ -36,6 +36,7 @@ class UserResponse(BaseModel):
         from_attributes = True
 
 class UserUpdate(BaseModel):
+    id: int
     username: str
     email: EmailStr
     phone: str

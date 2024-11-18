@@ -19,5 +19,5 @@ class Business(Base):
     category = Column(String, nullable=False, default="pending")
 
 
-    reservations = relationship("Reservation", back_populates="business")
+  #  reservations = relationship("Reservation", back_populates="business")
 
