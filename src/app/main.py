@@ -28,7 +28,7 @@ app.add_middleware(
 
 @app.get("/")
 def read_root():
-    return {"message": "Welcome to the Instant Reserve API"}
+    return {"message": "Welcomeeeeeeeeeeeeeeee///// to the Instant Reserve API"}
 
     ##PYTHONPATH=src uvicorn app.main:app --reload
 
