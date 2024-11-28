@@ -16,7 +16,7 @@ class ReservationCreate(ReservationBase):
     date_time: datetime
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 class Reservation(ReservationBase):
     id: int
@@ -27,7 +27,7 @@ class Reservation(ReservationBase):
     reservationDate: datetime
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 class ReservationResponse(BaseModel):
     id: int
