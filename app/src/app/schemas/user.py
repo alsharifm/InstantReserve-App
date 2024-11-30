@@ -17,14 +17,11 @@ class UserCreate(UserBase):
     phone: str
     password: str
 
-
-
 class User(UserBase):
     id: int
 
     class Config:
         from_attributes = True
-
 
 class UserResponse(BaseModel):
     id: int

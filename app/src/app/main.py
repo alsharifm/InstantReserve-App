@@ -1,6 +1,6 @@
 from fastapi import FastAPI
-from src.app.core.database import engine, Base
-from src.app.routes import user, reservation, business
+from app.core.database import engine, Base
+from app.routes import user, reservation, business
 
 
 # Initialize the FastAPI app

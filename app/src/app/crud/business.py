@@ -1,5 +1,5 @@
 from sqlalchemy.orm import Session
-from src.app.models.business import Business
+from app.models.business import Business
 from passlib.context import CryptContext
 from sqlalchemy.exc import IntegrityError
 from fastapi import HTTPException, status

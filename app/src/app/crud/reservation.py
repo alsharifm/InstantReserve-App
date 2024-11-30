@@ -1,12 +1,12 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 
-from src.app.core.auth import decode_access_token, oauth2_scheme
-from src.app.dependencies import get_db
-from src.app.crud.user import get_user_by_username
+from app.core.auth import decode_access_token, oauth2_scheme
+from app.dependencies import get_db
+from app.crud.user import get_user_by_username
 from sqlalchemy.exc import SQLAlchemyError
-from src.app.schemas.reservation import ReservationCreate, Reservation, ReservationUpdate
-from src.app.schemas.user import UserUpdate
+from app.schemas.reservation import ReservationCreate, Reservation, ReservationUpdate
+from app.schemas.user import UserUpdate
 
 
 # Reservation CRUD Operations with enhanced error handling

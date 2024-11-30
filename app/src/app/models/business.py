@@ -2,7 +2,7 @@ import enum
 from datetime import UTC, datetime
 from sqlalchemy import Boolean, Column, DateTime, Integer, String
 from app.core.database import Base
-from sqlmodel import Field, Relationship, Session, SQLModel, create_engine
+#from sqlmodel import Field, Relationship, Session, SQLModel, create_engine
 from sqlalchemy.orm import relationship
 
 from app.core.database import Base
@@ -19,5 +19,5 @@ class Business(Base):
     category = Column(String, nullable=False, default="pending")
 
 
-  #  reservations = relationship("Reservation", back_populates="business")
+    reservations = relationship("Reservation", back_populates="business")
 

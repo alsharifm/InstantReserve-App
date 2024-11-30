@@ -1,9 +1,9 @@
-from datetime import UTC, datetime
+from datetime import UTC
 
-from sqlalchemy import Boolean, Column, DateTime, Integer, String
+from sqlalchemy import Column, Integer, String
 from sqlalchemy.orm import relationship
 
-from src.app.core.database import Base
+from app.core.database import Base
 
 
 class User(Base):
@@ -17,4 +17,4 @@ class User(Base):
     fullname = Column(String, nullable=False)
     verification_code = Column(String, nullable=True)
     
-    #reservations = relationship("Reservation", back_populates="user")
+    reservations = relationship("Reservation", back_populates="user")
