@@ -12,10 +12,7 @@ from app.schemas.user import UserUpdate
 # Reservation CRUD Operations with enhanced error handling
 def create_reservation(db: Session, reservation: ReservationCreate, user_id: int):
     db_reservation = Reservation(
-        location=reservation.location,
-        time=reservation.time,
         user_id=user_id,
-        business_id=reservation.business_id,  # Dynamic business_id
         party_size=reservation.party_size,
         reservationTime=reservation.reservationTime,
         reservationDate=reservation.reservationDate,
