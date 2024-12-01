@@ -5,17 +5,28 @@ from src.app.core.auth import decode_access_token, oauth2_scheme
 from src.app.dependencies import get_db
 from src.app.crud.user import get_user_by_username
 from sqlalchemy.exc import SQLAlchemyError
-from src.app.schemas.reservation import ReservationCreate, Reservation, ReservationUpdate
+from src.app.models.reservation import Reservation
+from src.app.schemas.reservation import ReservationCreate, ReservationUpdate
 from src.app.schemas.user import UserUpdate
+from sqlalchemy import func
 
 
 # Reservation CRUD Operations with enhanced error handling
 def create_reservation(db: Session, reservation: ReservationCreate, user_id: int):
-    db_reservation = Reservation(date_time=reservation.date_time, user_id=user_id, business_id=3)
+    db_reservation = Reservation(
+        #**reservation.model_dump()
+        creation_date = reservation.creation_date,
+        party_size = reservation.party_size,
+        reservation_time=reservation.reservation_time, 
+        user_id= user_id, 
+       # business_id=5,
+        )
+
     db.add(db_reservation)
     db.commit()
     db.refresh(db_reservation)
-    return {"success": True, "data": db_reservation, "error": None}
+    #{"success": True, "data": db_reservation, "error": None}
+    return db_reservation
 
 def get_reservation(db: Session, reservation_id: int):
     db_reservation = db.query(Reservation).filter(Reservation.id == reservation_id).first()

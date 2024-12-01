@@ -21,6 +21,9 @@ class UserCreate(UserBase):
 
 class User(UserBase):
     id: int
+    username: str
+    email: EmailStr
+    phone: str
 
     class Config:
         from_attributes = True

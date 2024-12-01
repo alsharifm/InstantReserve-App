@@ -36,9 +36,8 @@ dependencies = [
 ]
 
 [project.urls]
-Documentation = "https://github.com/U.N. Owen/app#readme"
-Issues = "https://github.com/U.N. Owen/app/issues"
-Source = "https://github.com/U.N. Owen/app"
+Documentation = "https://github.com/alsharifm/InstantReserve-App/README.txt"
+Source = "https://github.com/alsharifm/InstantReserve-App"
 
 [tool.hatch.version]
 path = "src/app/__about__.py"
@@ -79,4 +78,11 @@ exclude_lines = [
   "no cov",
   "if __name__ == .__main__.:",
   "if TYPE_CHECKING:",
+]
+
+[tool.ruff.lint.flake8-bugbear]
+extend-immutable-calls = [
+    # Whitelisted default arguments
+    "fastapi.Header",
+    "fastapi.Depends",
 ]
