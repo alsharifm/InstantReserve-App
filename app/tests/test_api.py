@@ -8,7 +8,7 @@ from src.app.main import app
 from src.app.core.database import Base
 from src.app.dependencies import get_db
 from src.app.schemas.user import UserCreate, UserUpdate
-from src.app.schemas.reservations import ReservationCreate, ReservationUpdate
+from src.app.schemas.reservation import ReservationCreate, ReservationUpdate
 from datetime import datetime
 
 # Setup the test database

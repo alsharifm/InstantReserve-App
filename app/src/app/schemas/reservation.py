@@ -1,12 +1,10 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, ValidationError
 from datetime import datetime
+from typing import Optional
 
 class ReservationBase(BaseModel):
     location: str
-    time: datetime
-    party_size: int
-
-class ReservationCreate(ReservationBase):
+    time: int
     user_id: int
     business_id: int
     party_size: int
@@ -14,16 +12,16 @@ class ReservationCreate(ReservationBase):
     reservationDate: datetime
     date_time: datetime
 
-    class Config:
-        from_attributes = True
+class ReservationCreate(ReservationBase):
+    pass  # Inherit all fields from ReservationBase without redefining
 
 class Reservation(ReservationBase):
-    id: int
-    user_id: int
-    business_id: int
-    party_size: int
-    reservationTime: int
-    reservationDate: datetime
+    id: Optional[int]  # Add the `id` field to represent the complete reservation object
+try:
+     Reservation()
+except ValidationError as exc:
+    print(repr(exc.errors()[0]['type']))
+    #> 'missing'
 
     class Config:
         from_attributes = True

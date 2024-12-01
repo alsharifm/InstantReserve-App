@@ -17,4 +17,4 @@ class User(Base):
     fullname = Column(String, nullable=False)
     verification_code = Column(String, nullable=True)
     
-    reservations = relationship("Reservation", back_populates="user")
+    reservation = relationship("Reservation", back_populates="user")

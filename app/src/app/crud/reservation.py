@@ -11,11 +11,20 @@ from app.schemas.user import UserUpdate
 
 # Reservation CRUD Operations with enhanced error handling
 def create_reservation(db: Session, reservation: ReservationCreate, user_id: int):
-    db_reservation = Reservation(date_time=reservation.date_time, user_id=user_id, business_id=3)
+    db_reservation = Reservation(
+        location=reservation.location,
+        time=reservation.time,
+        user_id=user_id,
+        business_id=reservation.business_id,  # Dynamic business_id
+        party_size=reservation.party_size,
+        reservationTime=reservation.reservationTime,
+        reservationDate=reservation.reservationDate,
+        date_time=reservation.date_time,
+    )
     db.add(db_reservation)
     db.commit()
     db.refresh(db_reservation)
-    return {"success": True, "data": db_reservation, "error": None}
+    return {"success": True, "data": db_reservation, "error": None}  # Return the reservation object
 
 def get_reservation(db: Session, reservation_id: int):
     db_reservation = db.query(Reservation).filter(Reservation.id == reservation_id).first()
