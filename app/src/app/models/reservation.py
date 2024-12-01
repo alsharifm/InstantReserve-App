@@ -14,8 +14,6 @@ class Reservation(Base):
     reservation_time = Column(Integer, nullable=False)
     party_size = Column(Integer, nullable = False)
 
-    user_id = Column(Integer, ForeignKey("users.id"))
-    #business_id = Column(Integer, ForeignKey("businesses.id"))
     
     user = relationship("User", back_populates="reservations")
     #business = relationship("Business", back_populates="reservations")

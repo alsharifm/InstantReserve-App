@@ -36,8 +36,9 @@ dependencies = [
 ]
 
 [project.urls]
-Documentation = "https://github.com/alsharifm/InstantReserve-App/README.txt"
-Source = "https://github.com/alsharifm/InstantReserve-App"
+Documentation = "https://github.com/U.N. Owen/app#readme"
+Issues = "https://github.com/U.N. Owen/app/issues"
+Source = "https://github.com/U.N. Owen/app"
 
 [tool.hatch.version]
 path = "src/app/__about__.py"

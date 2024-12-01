@@ -94,14 +94,3 @@ def update_user_endpoint(id: int, user: UserUpdate, db: Session = Depends(get_db
     if updated_user == 0:
         raise HTTPException(status_code=404, detail="User not found")
     return updated_user
-
-##Users may not need to access all users, will get back to it if needed
-#@router.get("/api/users")
-#def get_users(db: Session = Depends(get_db), id = 4):
-    
-   # for int in db.query(User):
-      #  print( db_user = get_user(db, int))
- #   return db.query(User).filter(User.id == id).first()
-    #if not users:
-     #   raise HTTPException(status_code=404, detail="No users found")
-    
