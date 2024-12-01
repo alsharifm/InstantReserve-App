@@ -6,6 +6,7 @@ from sqlalchemy.orm import relationship
 from src.app.core.database import Base
 
 
+
 class User(Base):
     __tablename__ = 'users'
     
@@ -17,4 +18,4 @@ class User(Base):
     fullname = Column(String, nullable=False)
     verification_code = Column(String, nullable=True)
     
-    #reservations = relationship("Reservation", back_populates="user")
+    reservations = relationship("Reservation", back_populates="user")

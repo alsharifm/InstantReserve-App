@@ -1,50 +1,34 @@
 from pydantic import BaseModel
 from datetime import datetime
 
-class ReservationBase(BaseModel):
-    location: str
-    time: datetime
+class ReservationCreate(BaseModel):
     party_size: int
+    reservation_time: int
+    creation_date: datetime
 
-class ReservationCreate(ReservationBase):
-    user_id: int
-    business_id: int
-    party_size: int
-    reservationTime: int
-    reservationDate: datetime
-    date_time: datetime
 
-    class Config:
-        orm_mode = True
-
-class Reservation(ReservationBase):
+class Reservation(BaseModel):
     id: int
-    user_id: int
-    business_id: int
     party_size: int
-    reservationTime: int
-    reservationDate: datetime
+    reservation_time: int
+    creation_date: datetime
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 class ReservationResponse(BaseModel):
     id: int
-    created_at: datetime
+    creation_date: datetime
 
     class Config:
         from_attributes = True
 
 class ReservationUpdate(BaseModel):
-    date_time: datetime = None
-    user_id: int = None
-    business_id: int = None
+    reservation_time: int
 
 class ReservationSchema(BaseModel):
     id: int
-    user_id: int
-    business_id: int
-    date_time: datetime
+    reservation_time: int
 
     class Config:
         from_attributes = True
