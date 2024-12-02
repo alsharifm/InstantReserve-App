@@ -1,9 +1,9 @@
 from fastapi import FastAPI
 from app.routes import api_router
-from src.app.core.database import engine, Base
-from src.app.routes import user, reservation
+from app.core.database import engine, Base
 from fastapi.middleware.cors import CORSMiddleware
 
+Base.metadata.create_all(bind=engine)
 
 # Initialize the FastAPI app
 app = FastAPI()

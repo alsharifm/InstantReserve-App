@@ -1,14 +1,12 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 
-from src.app.core.auth import decode_access_token, oauth2_scheme
-from src.app.dependencies import get_db
-from src.app.crud.user import get_user_by_username
-
-from sqlalchemy.orm import Session
-from src.app.crud.reservation import create_reservation, get_reservation
-from src.app.schemas.reservation import ReservationCreate, Reservation, ReservationUpdate, ReservationSchema
-import src.app.crud.user as user_service
+from app.core.auth import decode_access_token, oauth2_scheme
+from app.dependencies import get_db
+from app.crud.user import get_user_by_username
+from app.crud.reservation import create_reservation, get_reservation
+from app.schemas.reservation import ReservationCreate, Reservation, ReservationUpdate, ReservationSchema
+import app.crud.user as user_service
 
 router = APIRouter()
 

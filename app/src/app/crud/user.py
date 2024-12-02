@@ -1,18 +1,14 @@
 import secrets
 
-from fastapi import HTTPException
+from fastapi import HTTPException, status
 from passlib.hash import bcrypt
 from sqlalchemy.orm import Session
 
-from src.app.core.config import get_settings
-from src.app.core.security import verify_password
-from src.app.models.user import User
-from src.app.schemas.user import UserCreate, UserUpdate
-from sqlalchemy.orm import Session
-from src.app.models.reservation import Reservation
-from src.app.models.business import Business
-from sqlalchemy.exc import IntegrityError
-from fastapi import HTTPException, status
+from app.core.config import get_settings
+from app.core.security import verify_password
+from app.models.user import User
+from app.schemas.user import UserCreate, UserUpdate
+
 from sqlalchemy.exc import SQLAlchemyError
 
 

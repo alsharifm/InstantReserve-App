@@ -13,8 +13,8 @@ from src.app.core.auth import (
 from app.dependencies import get_db
 from app.schemas.token import Token
 from app.schemas.user import UserCreate, UserResponse, UserUpdate, User, UserSchema
-from src.app.crud.user import delete_user, update_user, get_user, create_user, get_user_by_email
-from typing import List
+from app.crud.user import delete_user, update_user, get_user, create_user, get_user_by_email
+
 
 router = APIRouter()
 
