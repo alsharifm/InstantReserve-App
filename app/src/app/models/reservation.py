@@ -9,7 +9,7 @@ from app.core.database import Base
 
 class Reservation(Base):
     __tablename__ = "reservations"
-    __tablename__ = "reservations"
+
     
     id = Column(Integer, primary_key=True, index=True)
     creation_date = Column(DateTime, default=datetime.now(UTC))
@@ -17,10 +17,7 @@ class Reservation(Base):
     party_size = Column(Integer, nullable = False)
 
     user_id = Column(Integer, ForeignKey("users.id"))
-    #business_id = Column(Integer, ForeignKey("businesses.id"))
     
     user = relationship("User", back_populates="reservations")
-    #business = relationship("Business", back_populates="reservations")
 
-    user = relationship("User", back_populates="reservations")
-    #business = relationship("Business", back_populates="reservations")
+

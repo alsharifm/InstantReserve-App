@@ -11,14 +11,13 @@ class Reservation(BaseModel):
     id: int
     party_size: int
     reservation_time: int
-    creation_date: datetime
 
     class Config:
         from_attributes = True
 
 class ReservationResponse(BaseModel):
     id: int
-    creation_date: datetime
+
 
     class Config:
         from_attributes = True
