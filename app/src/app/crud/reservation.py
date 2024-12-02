@@ -25,17 +25,7 @@ def create_reservation(db: Session, reservation: ReservationCreate, user_id: int
     return db_reservation
 
 def get_reservation(db: Session, reservation_id: int):
-    db_reservation = db.query(Reservation).filter(Reservation.id == reservation_id).first()
-    if db_reservation:
-        return {"success": True, "data": db_reservation, "error": None}
-    return {
-        "success": False,
-        "data": None,
-        "error": {
-            "code": status.HTTP_404_NOT_FOUND,
-            "message": "Reservation not found"
-        }
-    }
+    return db.query(Reservation).filter(Reservation.id == reservation_id).first()
 
 def update_reservation(db: Session, reservation_id: int, reservation_data: ReservationUpdate):
     try:
