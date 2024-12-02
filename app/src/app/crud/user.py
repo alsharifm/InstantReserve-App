@@ -114,17 +114,3 @@ def update_user(db: Session, user_id: int, user: UserUpdate):
         db.rollback()
         return {"success": False, "error": {"code": 500, "message": "An unexpected error occurred."}}
     
-##Users may not need to access all users, will get back to it if needed
-#def get_all_users(db: Session, user_id: int):
-#    db_user = db.query(User).filter(User.id == user_id)
-#    if db_user :
-#        return db.query(User).filter(User.id == user_id).first()
-#    else:
-#        return {
-#        "success": False,
-#        "data": None,
-#        "error": {
-#            "code": status.HTTP_404_NOT_FOUND,
-#            "message": "User not found"
-#        }
-#    }

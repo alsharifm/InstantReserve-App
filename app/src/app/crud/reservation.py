@@ -30,24 +30,14 @@ def get_reservation(db: Session, reservation_id: int):
 def update_reservation(db: Session, reservation_id: int, reservation_data: ReservationUpdate):
     try:
         db_reservation = db.query(Reservation).filter(Reservation.id == reservation_id).first()
-        if db_reservation is None:
-            return {"success": False, "error": {"code": 400, "message": "Reservation not found"}}
-        
-        for key, value in reservation_data.dict(exclude_unset=True).items():
-            setattr(db_reservation, key, value)
-        
-        db.commit()
-        db.refresh(db_reservation)
-        return {
-            "success": True,
-            "reservation": {
-                "date": db_reservation.date,
-                "time": db_reservation.time,
-                "party_size": db_reservation.party_size,
-                "status": db_reservation.status,
-            },
-            "error": None
-        }
+        if db_reservation:  
+            db_reservation.reservation_time = reservation_data.reservation_time
+
+            db.commit()
+            db.refresh(db_reservation)
+        else:
+            db_reservation = 0
+        return db_reservation
     except SQLAlchemyError as e:
         db.rollback()
         return {"success": False, "error": {"code": 500, "message": "An unexpected error occurred."}}
