@@ -4,7 +4,7 @@ from sqlalchemy.orm import Session
 from app.core.auth import decode_access_token, oauth2_scheme
 from app.dependencies import get_db
 from app.crud.user import get_user_by_username
-from app.crud.reservation import create_reservation, get_reservation, update_reservation
+from app.crud.reservation import create_reservation, get_reservation, update_reservation, delete_reservation
 from app.schemas.reservation import ReservationCreate, Reservation, ReservationUpdate, ReservationSchema
 import app.crud.user as user_service
 
@@ -26,12 +26,10 @@ def read_reservation(reservation_id: int, db: Session = Depends(get_db), token: 
     return db_reservation
 
 @router.delete("/api/reservation/{id}")
-def delete_reservation(id: int, db: Session = Depends(get_db, )):
-    reservation = db.query(Reservation).filter(Reservation.id == id).first()
-    if not reservation:
-        raise HTTPException(status_code=404, detail="Reservation not found")
-    db.delete(reservation)
-    db.commit()
+def cancel_reservation(id: int, db: Session = Depends(get_db, )):
+    result = delete_reservation(db, id)
+    if not result["success"]:
+        raise HTTPException(status_code=result["error"]["code"], detail=result["error"]["message"])
     return {"success": True}
 
 @router.put("/api/reservation/{id}", response_model=ReservationSchema)

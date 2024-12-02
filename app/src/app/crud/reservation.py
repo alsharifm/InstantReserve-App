@@ -41,3 +41,16 @@ def update_reservation(db: Session, reservation_id: int, reservation_data: Reser
     except SQLAlchemyError as e:
         db.rollback()
         return {"success": False, "error": {"code": 500, "message": "An unexpected error occurred."}}
+    
+def delete_reservation(db: Session, reservation_id: int):
+    try:
+        db_reservation = db.query(Reservation).filter(Reservation.id == reservation_id).first()
+        if db_reservation is None:
+            return {"success": False, "error": {"code": 400, "message": "User not found"}}
+        
+        db.delete(db_reservation)
+        db.commit()
+        return {"success": True, "error": None}
+    except SQLAlchemyError:
+        db.rollback()
+        return {"success": False, "error": {"code": 500, "message": "An unexpected error occurred."}}
