@@ -22,7 +22,7 @@ class UserCreate(UserBase):
 class User(UserBase):
     id: int
     username: str
-    email: EmailStr
+    email: str
     phone: str
 
     class Config:
@@ -32,7 +32,7 @@ class User(UserBase):
 class UserResponse(BaseModel):
     id: int
     username: str
-    email: EmailStr
+    email: str
     phone: str
 
     class Config:
@@ -41,14 +41,14 @@ class UserResponse(BaseModel):
 class UserUpdate(BaseModel):
     id: int
     username: str
-    email: EmailStr
+    email: str
     phone: str
 
 
 class UserSchema(BaseModel):
     id: int
     name: str
-    email: EmailStr
+    email: str
     phone: str
 
     class Config:
