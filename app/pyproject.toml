@@ -47,7 +47,7 @@ installer = "uv"
 path = ".venv"
 
 [tool.hatch.envs.default.scripts]
-dev = "uvicorn app.main:app --reload"
+dev = "PYTHONPATH=src uvicorn app.main:app --reload"
 
 [tool.hatch.envs.default.en-vars]
 PYTHONASYNCIODEBUG = "1"
