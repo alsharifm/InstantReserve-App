@@ -1,6 +1,7 @@
 from pydantic import BaseModel
 from datetime import datetime
 
+
 class ReservationCreate(BaseModel):
     party_size: int
     reservation_time: int
@@ -11,6 +12,7 @@ class Reservation(BaseModel):
     id: int
     party_size: int
     reservation_time: int
+    creation_date: datetime
 
     class Config:
         from_attributes = True
