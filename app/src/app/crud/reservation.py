@@ -54,3 +54,6 @@ def delete_reservation(db: Session, reservation_id: int):
     except SQLAlchemyError:
         db.rollback()
         return {"success": False, "error": {"code": 500, "message": "An unexpected error occurred."}}
+
+def get_user_reservations(db: Session, user_id: int):
+    return db.query(Reservation).filter(Reservation.user_id == user_id).all()
