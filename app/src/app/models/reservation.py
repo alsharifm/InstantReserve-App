@@ -15,7 +15,7 @@ class Reservation(Base):
     creation_date = Column(DateTime, default=datetime.now(UTC))
     reservation_time = Column(Integer, nullable=False)
     party_size = Column(Integer, nullable = False)
-
+    business_name = Column(String, nullable=False)
     user_id = Column(Integer, ForeignKey("users.id"))
     
     user = relationship("User", back_populates="reservations")

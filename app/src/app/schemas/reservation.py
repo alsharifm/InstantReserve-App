@@ -5,6 +5,7 @@ from datetime import datetime
 class ReservationCreate(BaseModel):
     party_size: int
     reservation_time: int
+    business_name: str
     creation_date: datetime
 
 
@@ -12,6 +13,7 @@ class Reservation(BaseModel):
     id: int
     party_size: int
     reservation_time: int
+    business_name: str
     creation_date: datetime
 
     class Config:
@@ -25,7 +27,7 @@ class ReservationResponse(BaseModel):
         from_attributes = True
 
 class ReservationUpdate(BaseModel):
-    reservation_time: int
+    party_size: int
 
 class ReservationSchema(BaseModel):
     id: int

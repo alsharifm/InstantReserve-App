@@ -11,7 +11,7 @@ from app.schemas.reservation import ReservationCreate, ReservationUpdate
 # Reservation CRUD Operations with enhanced error handling
 def create_reservation(db: Session, reservation: ReservationCreate, user_id: int):
     db_reservation = Reservation(
-        #**reservation.model_dump()
+        business_name = reservation.business_name,
         creation_date = reservation.creation_date,
         party_size = reservation.party_size,
         reservation_time=reservation.reservation_time, 
@@ -31,7 +31,7 @@ def update_reservation(db: Session, reservation_id: int, reservation_data: Reser
     try:
         db_reservation = db.query(Reservation).filter(Reservation.id == reservation_id).first()
         if db_reservation:  
-            db_reservation.reservation_time = reservation_data.reservation_time
+            db_reservation.party_size = reservation_data.party_size
 
             db.commit()
             db.refresh(db_reservation)
