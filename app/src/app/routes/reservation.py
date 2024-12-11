@@ -8,7 +8,6 @@ from app.crud.reservation import create_reservation, get_reservation, update_res
 from app.crud.reservation import get_user_reservations as fetch_user_reservations
 from app.schemas.reservation import ReservationCreate, Reservation, ReservationUpdate, ReservationSchema
 import app.crud.user as user_service
-from typing import List
 
 router = APIRouter()
 

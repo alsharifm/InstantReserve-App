@@ -1,12 +1,7 @@
-from fastapi import status
 from sqlalchemy.orm import Session
-
 from sqlalchemy.exc import SQLAlchemyError
 from app.models.reservation import Reservation
 from app.schemas.reservation import ReservationCreate, ReservationUpdate
-
-
-
 
 # Reservation CRUD Operations with enhanced error handling
 def create_reservation(db: Session, reservation: ReservationCreate, user_id: int):
